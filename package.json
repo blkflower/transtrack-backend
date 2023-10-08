@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "db:migrate": "supabase db reset",
+    "db:remote:migrate": "supabase db push",
+    "db:remote:seed": "ts-node supabase/seed-remote.ts"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Black Flower (https://github.com/blkflower)",
   "license": "ISC",
   "devDependencies": {
-    "supabase": "^1.100.1"
+    "@types/pg": "^8.10.3",
+    "supabase": "^1.100.1",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "pg": "^8.11.3"
   }
 }
