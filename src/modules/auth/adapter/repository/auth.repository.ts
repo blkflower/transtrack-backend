@@ -4,16 +4,16 @@ import { createClient } from '@supabase/supabase-js'
 
 @Injectable()
 export class AuthRepository {
-    private supabase_url: string;
-    private anon_key: string;
+    private supabaseUrl: string;
+    private supabaseKey: string;
 
     constructor(configService: ConfigService) {
-        this.supabase_url = configService.get('SUPABASE_URL');
-        this.anon_key = configService.get('SUPABASE_KEY');
+        this.supabaseUrl = configService.get('SUPABASE_URL');
+        this.supabaseKey = configService.get('SUPABASE_KEY');
     }
 
     async login( email: string ): Promise<void> {
-        const supabase = createClient(this.supabase_url, this.anon_key);
+        const supabase = createClient(this.supabaseUrl, this.supabaseKey);
         await supabase.auth.signInWithOtp({ email });
     }
 }
