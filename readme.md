@@ -1,13 +1,13 @@
-# TransTrack Backend
+# Pitaka Backend
 
-Backend service for the TransTrack application, built with [Supabase](https://supabase.com/).
+Backend service for the Pitaka application, built with [Supabase](https://supabase.com/).
 
 ## Getting started
 
 ```bash
 # Clone the repository
-git clone https://github.com/blkflower/transtrack-backend.git
-cd transtrack-backend
+git clone https://github.com/blkflower/pitaka-backend.git
+cd pitaka-backend
 
 # Install dependencies
 npm ci
