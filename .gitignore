@@ -1,2 +1,15 @@
+logs
+*.log
+npm-debug.log*
+.DS_Store
+
+*.iml
+.idea
+.tscache
+node_modules/
+typings/
+coverage/
+dist/
+
 node_modules
 .env
