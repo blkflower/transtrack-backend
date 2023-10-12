@@ -3,8 +3,8 @@ import { TransactionController } from './adapter/controller/transaction.controll
 import { TransactionService } from './usecase/service/transaction.service';
 
 @Module({
-  imports: [],
-  controllers: [TransactionController],
-  providers: [TransactionService],
+    imports: [],
+    controllers: [TransactionController],
+    providers: [TransactionService],
 })
 export class TransactionModule {}

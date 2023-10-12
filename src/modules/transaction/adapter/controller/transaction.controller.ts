@@ -4,11 +4,11 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class TransactionController {
-  constructor(private readonly transactionService: TransactionService) {}
+    constructor(private readonly transactionService: TransactionService) {}
 
-  @Get()
-  @UseGuards(AuthGuard('jwt'))
-  getHello(): string {
-    return this.transactionService.getHello();
-  }
+    @Get()
+    @UseGuards(AuthGuard('jwt'))
+    getHello(): string {
+        return this.transactionService.getHello();
+    }
 }
