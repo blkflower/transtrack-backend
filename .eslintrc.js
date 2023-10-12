@@ -21,6 +21,6 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/indent': [2, 2],
+    '@typescript-eslint/indent': ['error', 2],
   },
 };
