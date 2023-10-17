@@ -2,9 +2,9 @@ import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { UserProfileService } from '../../usecase/service/user-profile.service';
 import { SupabaseGuard } from 'src/modules/auth/guard/auth.guard';
 import { AuthUser } from 'src/modules/auth/decorator/auth-user.decorator';
-import { UserProfileInput } from '../../dto/user-profile.input';
-import { UserProfileOutput } from '../../dto/user-profile.output';
-import { AuthUserData } from '../../entity/auth-user-data.model';
+import { UserProfileInput } from '../dto/user-profile.input';
+import { UserProfileOutput } from '../dto/user-profile.output';
+import { AuthUserData } from '../../../auth/entity/auth-user-data.model';
 
 @Controller('/user-profile')
 export class UserProfileController {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserProfileRepository } from '../../adapter/repository/user-profile.repository';
 import { UserProfile } from '../../entity/user-profile.model';
-import { UserProfileOutput } from '../../dto/user-profile.output';
+import { UserProfileOutput } from '../../adapter/dto/user-profile.output';
 
 @Injectable()
 export class UserProfileService {

@@ -2,7 +2,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { createClient } from '@supabase/supabase-js'
 import { UserProfile } from "../../entity/user-profile.model";
-import { UserProfileOutput } from "../../dto/user-profile.output";
+import { UserProfileOutput } from "../dto/user-profile.output";
 
 @Injectable()
 export class UserProfileRepository {
