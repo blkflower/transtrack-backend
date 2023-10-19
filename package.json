@@ -48,7 +48,9 @@
     "@nestjs/core": "^10.0.0",
     "@nestjs/passport": "^10.0.2",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/swagger": "^7.1.13",
     "@supabase/supabase-js": "^2.38.0",
+    "class-validator": "^0.14.0",
     "pg": "^8.11.3"
   }
 }
