@@ -6,7 +6,7 @@ import { CategoryOutput } from '../../adapter/dto/category.output';
 @Injectable()
 export class CategoryService {
     constructor(private readonly categoryRepository: CategoryRepository) {}
-    
+
     async createCategory(category: Category): Promise<void> {
         await this.categoryRepository.createCategory(category);
     }

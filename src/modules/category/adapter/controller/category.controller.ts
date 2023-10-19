@@ -12,14 +12,16 @@ export class CategoryController {
     @Post()
     @UseGuards(SupabaseGuard)
     async createCategory(@Body() category: CategoryInput): Promise<void> {
-        if (!ENABLE_CATEGORY_MUTATION) throw new UnprocessableEntityException('Category mutation is currently disabled');
+        if (!ENABLE_CATEGORY_MUTATION)
+            throw new UnprocessableEntityException('Category mutation is currently disabled');
         await this.categoryService.createCategory(category);
     }
 
     @Post('/:id')
     @UseGuards(SupabaseGuard)
     async updateCategory(@Param('id') id: string, @Body() category: CategoryInput): Promise<void> {
-        if (!ENABLE_CATEGORY_MUTATION) throw new UnprocessableEntityException('Category mutation is currently disabled');
+        if (!ENABLE_CATEGORY_MUTATION)
+            throw new UnprocessableEntityException('Category mutation is currently disabled');
         await this.categoryService.updateCategory(id, category);
     }
 
@@ -38,7 +40,8 @@ export class CategoryController {
     @Delete('/:id')
     @UseGuards(SupabaseGuard)
     async deleteCategory(@Param('id') id: string): Promise<void> {
-        if (!ENABLE_CATEGORY_MUTATION) throw new UnprocessableEntityException('Category mutation is currently disabled');
+        if (!ENABLE_CATEGORY_MUTATION)
+            throw new UnprocessableEntityException('Category mutation is currently disabled');
         await this.categoryService.deleteCategoryBy(id);
     }
 }

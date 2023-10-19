@@ -1,8 +1,8 @@
-import { Injectable, Logger } from "@nestjs/common";
-import { createClient } from '@supabase/supabase-js'
-import { Category } from "../../entity/category.model";
-import { CategoryOutput } from "../dto/category.output";
-import { SUPABASE_KEY, SUPABASE_URL } from "src/modules/common/environment";
+import { Injectable, Logger } from '@nestjs/common';
+import { createClient } from '@supabase/supabase-js';
+import { Category } from '../../entity/category.model';
+import { CategoryOutput } from '../dto/category.output';
+import { SUPABASE_KEY, SUPABASE_URL } from 'src/modules/common/environment';
 
 @Injectable()
 export class CategoryRepository {
@@ -11,11 +11,9 @@ export class CategoryRepository {
 
     async createCategory(category: Category): Promise<void> {
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { error } = await supabase.from(this.CATEGORY_TABLE).insert(
-            { 
-                name: category.name,
-            }
-        );
+        const { error } = await supabase.from(this.CATEGORY_TABLE).insert({
+            name: category.name,
+        });
         if (error) {
             this.logger.error(error);
             throw error;
@@ -24,9 +22,12 @@ export class CategoryRepository {
 
     async updateCategory(id: string, category: Category): Promise<void> {
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { error } = await supabase.from(this.CATEGORY_TABLE).update({
-            name: category.name,
-        }).eq('id', id);
+        const { error } = await supabase
+            .from(this.CATEGORY_TABLE)
+            .update({
+                name: category.name,
+            })
+            .eq('id', id);
         if (error) {
             this.logger.error(error);
             throw error;

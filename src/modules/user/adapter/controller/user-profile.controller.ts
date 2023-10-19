@@ -12,7 +12,10 @@ export class UserProfileController {
 
     @Post()
     @UseGuards(SupabaseGuard)
-    async upsertUserProfile(@AuthUser() { sub: id }: AuthUserData, @Body() userProfile: UserProfileInput): Promise<void> {
+    async upsertUserProfile(
+        @AuthUser() { sub: id }: AuthUserData,
+        @Body() userProfile: UserProfileInput
+    ): Promise<void> {
         await this.userProfileService.upsertUserProfile(id, userProfile);
     }
 
