@@ -7,5 +7,6 @@ import { UserProfileRepository } from './adapter/repository/user-profile.reposit
     imports: [],
     controllers: [UserProfileController],
     providers: [UserProfileService, UserProfileRepository],
+    exports: [UserProfileService],
 })
 export class UserModule {}
