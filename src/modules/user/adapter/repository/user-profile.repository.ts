@@ -1,8 +1,8 @@
-import { Injectable, Logger } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { createClient } from '@supabase/supabase-js'
-import { UserProfile } from "../../entity/user-profile.model";
-import { UserProfileOutput } from "../../dto/user-profile.output";
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { createClient } from '@supabase/supabase-js';
+import { UserProfile } from '../../entity/user-profile.model';
+import { UserProfileOutput } from '../../dto/user-profile.output';
 
 @Injectable()
 export class UserProfileRepository {
@@ -19,11 +19,11 @@ export class UserProfileRepository {
     async upsertUserProfile(userId: string, userProfile: UserProfile): Promise<void> {
         const supabase = createClient(this.supabaseUrl, this.supabaseKey);
         const { error } = await supabase.from(this.USER_PROFILE_TABLE).upsert(
-            { 
-                user_id: userId, 
-                first_name: userProfile.firstName, 
-                last_name: userProfile.lastName, 
-                photo_url: userProfile.photoUrl
+            {
+                user_id: userId,
+                first_name: userProfile.firstName,
+                last_name: userProfile.lastName,
+                photo_url: userProfile.photoUrl,
             },
             { onConflict: 'user_id' }
         );

@@ -41,3 +41,20 @@ npm run db:remote:migrate
 # Add seed data to the remote database, only do this once
 npm run db:remote:seed
 ```
+
+## Starting the server
+
+Install the dependencies of the NestJS server locally and run the server in order to be able to use the APIs
+
+```bash
+# Install all dependencies
+npm i
+
+# Run the server locally
+npm run start-dev
+```
+We can now call our server APIs using the base url of `localhost:3000/`
+
+## Swagger documentation
+
+When our local server is up, when can then access our API documentation using the url `localhost:3000/api`

@@ -6,7 +6,7 @@ import { UserProfileOutput } from '../../dto/user-profile.output';
 @Injectable()
 export class UserProfileService {
     constructor(private readonly userProfileRepository: UserProfileRepository) {}
-    
+
     async upsertUserProfile(userId: string, userProfile: UserProfile): Promise<void> {
         await this.userProfileRepository.upsertUserProfile(userId, userProfile);
     }
