@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { createClient } from '@supabase/supabase-js'
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { createClient } from '@supabase/supabase-js';
 
 @Injectable()
 export class AuthRepository {
@@ -12,7 +12,7 @@ export class AuthRepository {
         this.supabaseKey = configService.get('SUPABASE_KEY');
     }
 
-    async login( email: string ): Promise<void> {
+    async login(email: string): Promise<void> {
         const supabase = createClient(this.supabaseUrl, this.supabaseKey);
         await supabase.auth.signInWithOtp({ email });
     }

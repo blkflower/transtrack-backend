@@ -15,7 +15,10 @@ export class UserProfileController {
 
     @Post()
     @UseGuards(SupabaseGuard)
-    async upsertUserProfile(@AuthUser() { sub: id }: AuthUserData, @Body() userProfile: UserProfileInput): Promise<void> {
+    async upsertUserProfile(
+        @AuthUser() { sub: id }: AuthUserData,
+        @Body() userProfile: UserProfileInput
+    ): Promise<void> {
         await this.userProfileService.upsertUserProfile(id, userProfile);
     }
 
@@ -24,7 +27,7 @@ export class UserProfileController {
         status: 200,
         description: 'The found record',
         type: UserProfileOutput,
-      })
+    })
     @UseGuards(SupabaseGuard)
     async fetchUserProfile(@AuthUser() { sub: id }: AuthUserData): Promise<UserProfileOutput> {
         return await this.userProfileService.getUserProfile(id);
