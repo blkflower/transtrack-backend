@@ -1,4 +1,4 @@
-create type transaction_type as enum ('income', 'expense');
+create type transaction_type as enum ('balance', 'expense');
 
 alter table if exists transactions
     add column if not exists transaction_type transaction_type not null,
