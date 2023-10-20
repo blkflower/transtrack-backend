@@ -46,12 +46,12 @@ export class CategoryRepository {
 
     async getCategoryBy(id: string): Promise<CategoryOutput> {
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { data, error } = await supabase.from(this.CATEGORY_TABLE).select().eq('id', id);
+        const { data, error } = await supabase.from(this.CATEGORY_TABLE).select().eq('id', id).single();
         if (error) {
             this.logger.error(error);
             throw error;
         }
-        return data[0];
+        return data;
     }
 
     async deleteCategoryBy(id: string): Promise<void> {

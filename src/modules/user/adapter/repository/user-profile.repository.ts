@@ -28,11 +28,11 @@ export class UserProfileRepository {
 
     async getUserProfile(userId: string): Promise<UserProfileOutput> {
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { data, error } = await supabase.from(this.USER_PROFILE_TABLE).select().eq('user_id', userId);
+        const { data, error } = await supabase.from(this.USER_PROFILE_TABLE).select().eq('user_id', userId).single();
         if (error) {
             this.logger.error(error);
             throw error;
         }
-        return data[0];
+        return data;
     }
 }

@@ -57,22 +57,22 @@ export class TransactionRepository {
 
     async getTransactionBy(transactionId: string): Promise<TransactionOutput> {
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { data, error } = await supabase.from(this.TRANSACTION_TABLE).select().eq('id', transactionId);
+        const { data, error } = await supabase.from(this.TRANSACTION_TABLE).select().eq('id', transactionId).single();
         if (error) {
             this.logger.error(error);
             throw error;
         }
-        return data[0];
+        return data;
     }
 
     async checkTransactionBy(authUserId: string, transactionId: string): Promise<boolean> {
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { data, error } = await supabase.from(this.TRANSACTION_TABLE).select().eq('user_id', authUserId).eq('id', transactionId);
+        const { data, error } = await supabase.from(this.TRANSACTION_TABLE).select().eq('user_id', authUserId).eq('id', transactionId).single();
         if (error) {
             this.logger.error(error);
             throw error;
         }
-        return !!(data[0]);
+        return !!(data);
     }
 
     async deleteTransactionBy(transactionId: string): Promise<void> {
