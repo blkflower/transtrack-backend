@@ -7,5 +7,6 @@ import { CategoryRepository } from './adapter/repository/category.repository';
     imports: [],
     controllers: [CategoryController],
     providers: [CategoryService, CategoryRepository],
+    exports: [CategoryService],
 })
 export class CategoryModule {}

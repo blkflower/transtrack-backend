@@ -4,7 +4,10 @@ import { SupabaseGuard } from 'src/modules/auth/guard/auth.guard';
 import { CategoryInput } from '../dto/category.input';
 import { CategoryOutput } from '../dto/category.output';
 import { ENABLE_CATEGORY_MUTATION } from 'src/modules/common/environment';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('categories')
 @Controller('/categories')
 export class CategoryController {
     constructor(private readonly categoryService: CategoryService) {}
@@ -24,12 +27,22 @@ export class CategoryController {
     }
 
     @Get()
+    @ApiResponse({
+        status: 200,
+        description: 'The found record',
+        type: [CategoryOutput],
+    })
     @UseGuards(SupabaseGuard)
     async fetchCategories(): Promise<CategoryOutput[]> {
         return await this.categoryService.getCategories();
     }
 
     @Get('/:id')
+    @ApiResponse({
+        status: 200,
+        description: 'The found record',
+        type: CategoryOutput,
+    })
     @UseGuards(SupabaseGuard)
     async fetchCategory(@Param('id') id: string): Promise<CategoryOutput> {
         return await this.categoryService.getCategoryBy(id);

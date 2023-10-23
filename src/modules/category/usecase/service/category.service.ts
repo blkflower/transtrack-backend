@@ -26,4 +26,9 @@ export class CategoryService {
     async deleteCategoryBy(id: string): Promise<void> {
         await this.categoryRepository.deleteCategoryBy(id);
     }
+
+    async categoryExists(id: string): Promise<boolean> {
+        const category = await this.categoryRepository.getCategoryBy(id);
+        return !!category;
+    }
 }
