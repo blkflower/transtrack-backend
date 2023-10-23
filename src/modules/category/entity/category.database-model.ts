@@ -1,4 +1,4 @@
 export class CategoryDatabaseModel {
-    id?: number;
+    id: number;
     name: string;
 }

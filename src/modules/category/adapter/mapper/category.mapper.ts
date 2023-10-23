@@ -4,8 +4,8 @@ import { CategoryOutput } from '../dto/category.output';
 export class CategoryMapper {
     static mapToCategoryOutput(category: CategoryDatabaseModel): CategoryOutput {
         return {
-            id: category?.id,
-            name: category?.name,
+            id: category.id,
+            name: category.name,
         };
     }
 }
