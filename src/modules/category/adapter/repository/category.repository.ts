@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Category } from '../../entity/category.model';
 import { CategoryOutput } from '../dto/category.output';
 import { SUPABASE_KEY, SUPABASE_URL } from 'src/modules/common/environment';
+import { CategoryMapper } from '../mapper/category.mapper';
 
 @Injectable()
 export class CategoryRepository {
@@ -41,7 +42,7 @@ export class CategoryRepository {
             this.logger.error(error);
             throw error;
         }
-        return data;
+        return data.map((data) => CategoryMapper.mapToCategoryOutput(data));
     }
 
     async getCategoryBy(id: string): Promise<CategoryOutput> {
@@ -51,7 +52,7 @@ export class CategoryRepository {
             this.logger.error(error);
             throw error;
         }
-        return data;
+        return CategoryMapper.mapToCategoryOutput(data);
     }
 
     async deleteCategoryBy(id: string): Promise<void> {

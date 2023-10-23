@@ -1,4 +1,4 @@
-import { TransactionTypeEnum } from "./transaction.type.enum";
+import { TransactionTypeEnum } from './transaction.type.enum';
 
 export class Transaction {
     categoryId: number;
