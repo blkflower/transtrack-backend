@@ -1,5 +1,5 @@
-import { UserProfileDatabaseModel } from "../../entity/user-profile.database-model";
-import { UserProfileOutput } from "../dto/user-profile.output";
+import { UserProfileDatabaseModel } from '../../entity/user-profile.database-model';
+import { UserProfileOutput } from '../dto/user-profile.output';
 
 export class UserProfileMapper {
     static mapToUserProfileOutput(userProfile: UserProfileDatabaseModel): UserProfileOutput {

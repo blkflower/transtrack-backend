@@ -38,9 +38,7 @@ export class TransactionService {
     }
 
     async computeUserBalance(authUserId: string): Promise<number> {
-        const transactions: TransactionOutput[] = await this.transactionRepository.getTransactions(
-            authUserId
-        );
+        const transactions: TransactionOutput[] = await this.transactionRepository.getTransactions(authUserId);
         const userBalance: number = transactions.reduce((acc, transaction) => {
             return transaction.transactionType === TransactionTypeEnum.BALANCE
                 ? acc + transaction.amount
