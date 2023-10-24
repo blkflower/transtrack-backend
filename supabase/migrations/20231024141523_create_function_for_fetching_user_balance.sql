@@ -5,5 +5,4 @@ create or replace function compute_user_balance(user_id uuid) returns int as $$
     else amount end) 
   from transactions
     where user_id = user_id
-    group by user_id;
 $$ language sql;

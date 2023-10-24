@@ -97,7 +97,6 @@ export class TransactionRepository {
             this.logger.error(error);
             throw error;
         }
-        console.log(data);
         return data;
     }
 }
