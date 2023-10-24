@@ -15,13 +15,20 @@ export class TransactionController {
 
     @Post()
     @UseGuards(SupabaseGuard)
-    async createTransaction(@AuthUser() { sub: authUserId }: AuthUserData, @Body() transaction: TransactionInput): Promise<void> {
+    async createTransaction(
+        @AuthUser() { sub: authUserId }: AuthUserData,
+        @Body() transaction: TransactionInput
+    ): Promise<void> {
         await this.transactionService.createTransaction(authUserId, transaction);
     }
 
     @Post('/:id')
     @UseGuards(SupabaseGuard)
-    async updateTransaction(@AuthUser() { sub: authUserId }: AuthUserData, @Param('id') transactionId: string, @Body() transaction: TransactionInput): Promise<void> {
+    async updateTransaction(
+        @AuthUser() { sub: authUserId }: AuthUserData,
+        @Param('id') transactionId: string,
+        @Body() transaction: TransactionInput
+    ): Promise<void> {
         await this.transactionService.updateTransaction(authUserId, transactionId, transaction);
     }
 
@@ -43,13 +50,19 @@ export class TransactionController {
         type: TransactionOutput,
     })
     @UseGuards(SupabaseGuard)
-    async fetchTransaction(@AuthUser() { sub: authUserId }: AuthUserData, @Param('id') transactionId: string): Promise<TransactionOutput> {
+    async fetchTransaction(
+        @AuthUser() { sub: authUserId }: AuthUserData,
+        @Param('id') transactionId: string
+    ): Promise<TransactionOutput> {
         return await this.transactionService.getTransactionBy(authUserId, transactionId);
     }
 
     @Delete('/:id')
     @UseGuards(SupabaseGuard)
-    async deleteTransaction(@AuthUser() { sub: authUserId }: AuthUserData, @Param('id') transactionId: string): Promise<void> {
+    async deleteTransaction(
+        @AuthUser() { sub: authUserId }: AuthUserData,
+        @Param('id') transactionId: string
+    ): Promise<void> {
         await this.transactionService.deleteTransactionBy(authUserId, transactionId);
     }
 }

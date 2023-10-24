@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { UserProfile } from '../../entity/user-profile.model';
 import { UserProfileOutput } from '../dto/user-profile.output';
 import { SUPABASE_KEY, SUPABASE_URL } from 'src/modules/common/environment';
+import { UserProfileMapper } from '../mapper/user-profile.mapper';
 
 @Injectable()
 export class UserProfileRepository {
@@ -33,6 +34,6 @@ export class UserProfileRepository {
             this.logger.error(error);
             throw error;
         }
-        return data;
+        return UserProfileMapper.mapToUserProfileOutput(data);
     }
 }

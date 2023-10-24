@@ -1,8 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { createClient } from '@supabase/supabase-js';
 import { Transaction } from '../../entity/transaction.model';
-import { TransactionOutput } from '../dto/transaction.output';
 import { SUPABASE_KEY, SUPABASE_URL } from 'src/modules/common/environment';
+import { TransactionMapper } from '../mapper/transaction.mapper';
+import { TransactionOutput } from '../dto/transaction.output';
 
 @Injectable()
 export class TransactionRepository {
@@ -52,7 +53,7 @@ export class TransactionRepository {
             this.logger.error(error);
             throw error;
         }
-        return data;
+        return data.map((data) => TransactionMapper.mapToTransactionOutput(data));
     }
 
     async getTransactionBy(transactionId: string): Promise<TransactionOutput> {
@@ -62,17 +63,22 @@ export class TransactionRepository {
             this.logger.error(error);
             throw error;
         }
-        return data;
+        return TransactionMapper.mapToTransactionOutput(data);
     }
 
     async checkTransactionBy(authUserId: string, transactionId: string): Promise<boolean> {
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { data, error } = await supabase.from(this.TRANSACTION_TABLE).select().eq('user_id', authUserId).eq('id', transactionId).single();
+        const { data, error } = await supabase
+            .from(this.TRANSACTION_TABLE)
+            .select()
+            .eq('user_id', authUserId)
+            .eq('id', transactionId)
+            .single();
         if (error) {
             this.logger.error(error);
             throw error;
         }
-        return !!(data);
+        return !!data;
     }
 
     async deleteTransactionBy(transactionId: string): Promise<void> {
@@ -82,5 +88,15 @@ export class TransactionRepository {
             this.logger.error(error);
             throw error;
         }
+    }
+
+    async getUserBalance(authUserId: string): Promise<number> {
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        const { data, error } = await supabase.rpc('compute_user_balance', { user_id: authUserId });
+        if (error) {
+            this.logger.error(error);
+            throw error;
+        }
+        return data;
     }
 }

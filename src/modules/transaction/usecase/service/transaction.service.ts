@@ -6,7 +6,10 @@ import { CategoryService } from 'src/modules/category/usecase/service/category.s
 
 @Injectable()
 export class TransactionService {
-    constructor(private readonly transactionRepository: TransactionRepository, private readonly categoryService: CategoryService) {}
+    constructor(
+        private readonly transactionRepository: TransactionRepository,
+        private readonly categoryService: CategoryService
+    ) {}
 
     async createTransaction(authUserId: string, transaction: Transaction): Promise<void> {
         await this.validateCategory(transaction);
@@ -33,13 +36,23 @@ export class TransactionService {
         await this.transactionRepository.deleteTransactionBy(transactionId);
     }
 
+    async getUserBalance(authUserId: string): Promise<number> {
+        return await this.transactionRepository.getUserBalance(authUserId);
+    }
+
     private async validateCategory(transaction: Transaction) {
         const categoryExists: boolean = await this.categoryService.categoryExists(transaction.categoryId.toString());
         if (!categoryExists) throw new BadRequestException(`Category with id ${transaction.categoryId} does not exist`);
     }
 
     private async validateTransaction(authUserId: string, transactionId: string) {
-        const existingTransaction: boolean = await this.transactionRepository.checkTransactionBy(authUserId, transactionId);
-        if (!existingTransaction) throw new BadRequestException(`Transaction with id ${transactionId} does not exist or is not owned by user with id ${authUserId}`);
+        const existingTransaction: boolean = await this.transactionRepository.checkTransactionBy(
+            authUserId,
+            transactionId
+        );
+        if (!existingTransaction)
+            throw new BadRequestException(
+                `Transaction with id ${transactionId} does not exist or is not owned by user with id ${authUserId}`
+            );
     }
 }

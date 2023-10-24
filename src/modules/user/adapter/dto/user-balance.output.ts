@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CategoryOutput {
+export class UserBalanceOutput {
     @ApiProperty()
-    id: number;
+    userId: string;
 
     @ApiProperty()
-    name: string;
+    userBalance: number;
 }
