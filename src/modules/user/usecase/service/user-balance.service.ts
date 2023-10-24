@@ -7,7 +7,7 @@ export class UserBalanceService {
     constructor(private readonly transactionService: TransactionService) {}
 
     async fetchUserBalance(authUserId: string): Promise<UserBalanceOutput> {
-        const userBalance: number = await this.transactionService.computeUserBalance(authUserId);
+        const userBalance: number = await this.transactionService.getUserBalance(authUserId);
         return { userId: authUserId, userBalance };
     }
 }

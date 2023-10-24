@@ -89,4 +89,15 @@ export class TransactionRepository {
             throw error;
         }
     }
+
+    async getUserBalance(authUserId: string): Promise<number> {
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        const { data, error } = await supabase.rpc('compute_user_balance', { user_id: authUserId });
+        if (error) {
+            this.logger.error(error);
+            throw error;
+        }
+        console.log(data);
+        return data;
+    }
 }

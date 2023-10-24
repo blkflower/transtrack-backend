@@ -3,7 +3,6 @@ import { TransactionRepository } from '../../adapter/repository/transaction.repo
 import { Transaction } from '../../entity/transaction.model';
 import { TransactionOutput } from '../../adapter/dto/transaction.output';
 import { CategoryService } from 'src/modules/category/usecase/service/category.service';
-import { TransactionTypeEnum } from '../../entity/transaction.type.enum';
 
 @Injectable()
 export class TransactionService {
@@ -37,14 +36,8 @@ export class TransactionService {
         await this.transactionRepository.deleteTransactionBy(transactionId);
     }
 
-    async computeUserBalance(authUserId: string): Promise<number> {
-        const transactions: TransactionOutput[] = await this.transactionRepository.getTransactions(authUserId);
-        const userBalance: number = transactions.reduce((acc, transaction) => {
-            return transaction.transactionType === TransactionTypeEnum.BALANCE
-                ? acc + transaction.amount
-                : acc - transaction.amount;
-        }, 0);
-        return userBalance;
+    async getUserBalance(authUserId: string): Promise<number> {
+        return await this.transactionRepository.getUserBalance(authUserId);
     }
 
     private async validateCategory(transaction: Transaction) {
