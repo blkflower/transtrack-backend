@@ -1,7 +1,7 @@
 import { TransactionTypeEnum } from './transaction.type.enum';
 
 export class Transaction {
-    categoryId: number;
+    categoryId?: number;
     description: string;
     amount: number;
     transactionDate: Date;

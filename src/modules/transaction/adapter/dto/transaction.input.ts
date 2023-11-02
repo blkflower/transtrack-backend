@@ -1,11 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { TransactionTypeEnum } from '../../entity/transaction.type.enum';
-import { IsEnum, IsInt, IsNumber } from 'class-validator';
+import { IsEnum, IsInt, IsNumber, IsOptional } from 'class-validator';
 
 export class TransactionInput {
     @ApiProperty()
     @IsInt()
-    categoryId: number;
+    @IsOptional()
+    categoryId?: number;
 
     @ApiProperty()
     description: string;
