@@ -6,7 +6,7 @@ export class TransactionOutput {
     id: number;
 
     @ApiProperty()
-    categoryId: number;
+    categoryId?: number;
 
     @ApiProperty()
     description: string;

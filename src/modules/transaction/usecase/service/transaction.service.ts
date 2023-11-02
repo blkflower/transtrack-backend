@@ -41,8 +41,13 @@ export class TransactionService {
     }
 
     private async validateCategory(transaction: Transaction) {
-        const categoryExists: boolean = await this.categoryService.categoryExists(transaction.categoryId.toString());
-        if (!categoryExists) throw new BadRequestException(`Category with id ${transaction.categoryId} does not exist`);
+        if (transaction.categoryId) {
+            const categoryExists: boolean = await this.categoryService.categoryExists(
+                transaction.categoryId.toString()
+            );
+            if (!categoryExists)
+                throw new BadRequestException(`Category with id ${transaction.categoryId} does not exist`);
+        }
     }
 
     private async validateTransaction(authUserId: string, transactionId: string) {
