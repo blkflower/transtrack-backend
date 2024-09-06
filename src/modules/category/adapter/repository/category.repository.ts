@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { createClient } from '@supabase/supabase-js';
 import { Category } from '../../entity/category.model';
 import { CategoryOutput } from '../dto/category.output';
@@ -62,5 +62,15 @@ export class CategoryRepository {
             this.logger.error(error);
             throw error;
         }
+    }
+
+    async categoryExists(id: string): Promise<boolean> {
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        const { data, error } = await supabase.from(this.CATEGORY_TABLE).select().eq('id', id).single();
+        if (error) {
+            this.logger.error(error);
+            throw new BadRequestException(`Category with id ${id} does not exist`);
+        }
+        return !!data;
     }
 }

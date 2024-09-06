@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { createClient } from '@supabase/supabase-js';
 import { Transaction } from '../../entity/transaction.model';
 import { SUPABASE_KEY, SUPABASE_URL } from 'src/modules/common/environment';
@@ -76,7 +76,11 @@ export class TransactionRepository {
             .single();
         if (error) {
             this.logger.error(error);
-            throw error;
+            if (error) {
+                throw new BadRequestException(
+                    `Transaction with id ${transactionId} does not exist or is not owned by user with id ${authUserId}`
+                );
+            }
         }
         return !!data;
     }

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { TransactionRepository } from '../../adapter/repository/transaction.repository';
 import { Transaction } from '../../entity/transaction.model';
 import { TransactionOutput } from '../../adapter/dto/transaction.output';
@@ -42,22 +42,11 @@ export class TransactionService {
 
     private async validateCategory(transaction: Transaction) {
         if (transaction.categoryId) {
-            const categoryExists: boolean = await this.categoryService.categoryExists(
-                transaction.categoryId.toString()
-            );
-            if (!categoryExists)
-                throw new BadRequestException(`Category with id ${transaction.categoryId} does not exist`);
+            await this.categoryService.categoryExists(transaction.categoryId.toString());
         }
     }
 
     private async validateTransaction(authUserId: string, transactionId: string) {
-        const existingTransaction: boolean = await this.transactionRepository.checkTransactionBy(
-            authUserId,
-            transactionId
-        );
-        if (!existingTransaction)
-            throw new BadRequestException(
-                `Transaction with id ${transactionId} does not exist or is not owned by user with id ${authUserId}`
-            );
+        await this.transactionRepository.checkTransactionBy(authUserId, transactionId);
     }
 }

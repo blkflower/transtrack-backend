@@ -28,7 +28,6 @@ export class CategoryService {
     }
 
     async categoryExists(id: string): Promise<boolean> {
-        const category = await this.categoryRepository.getCategoryBy(id);
-        return !!category;
+        return await this.categoryExists(id);
     }
 }
